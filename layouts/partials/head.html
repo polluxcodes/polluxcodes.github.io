@@ -2,10 +2,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Pollux::codes</title>
+  <title>pollux::codes{{ if not .IsHome }}::{{ replace .Title " " "_" | lower}}{{ end }}</title>
   <meta name="author" content="Pollux">
   <meta name="description" content="The personal website of Pollux the fox. Join us for various shenanigans!">
   <meta name="keywords" content="personal, furry, coding, astronomy">
 
-  <link rel="stylesheet" href="/style.css">
+  {{ with resources.Get "css/normalize.css"}}
+    {{ $style := . | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+  {{ end }}
+  {{ with resources.Get "scss/style-template.scss"}}
+    {{ $style := . | resources.ExecuteAsTemplate "scss/style.scss" . | resources.ToCSS | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+  {{ end }}
+  {{ with .OutputFormats.Get "rss" -}}
+    {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
+  {{ end }}
+  <style>
+  </style>
 </head>

@@ -1,0 +1,33 @@
+{{ define "main" }}
+
+{{ with .CurrentSection }}
+<a href="{{ .RelPermalink }}">back</a>
+{{ end }}
+
+<h1>{{ .Title }}</h1>
+
+{{ .Date.Format "2006-01-02" }}<br>
+
+{{ .WordCount }} words, {{ .ReadingTime }}-minute read <br>
+
+{{ if isset .Params "blogtopics" }}
+  {{ $blogtopicsLen := len .Params.blogtopics }}
+  {{ if gt $blogtopicsLen 0 }}
+    topics: 
+    {{ range $k, $v := .Params.blogtopics }}
+      {{ $url := printf "blog/topics/%s" (. | urlize | lower)}}
+      <a href="{{ $url | absURL }}">{{ . }}</a>
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ .Content}}
+
+{{ with .PrevInSection }}
+previous article: <a href="{{ .RelPermalink }}">{{ .Title }}</a><br>
+{{ end }}
+{{ with .NextInSection }}
+next article: <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+{{ end }}
+
+{{ end }}

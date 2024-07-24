@@ -1,0 +1,60 @@
+<header class="header">
+  {{ with resources.GetMatch "images/pollux.*" }}
+  <img class="header__pic" src="{{ .RelPermalink }}" title="Still working on it!">
+  {{ end }}
+
+  <div class="header__section">
+    navigation
+  </div>
+  <div class="header__navigation">
+    {{ range .Site.Menus.main.ByWeight }}
+      <a class="a--plain " href="{{ .URL }}">{{ .Name }}</a>
+    {{ end }}
+  </div>
+
+  <div class="header__section">
+    resources
+  </div>
+  <div class="header__buttons">
+    <a class="a--plain" href="/feed.xml" download>
+      {{ with resources.GetMatch "images/rss.png" }}
+      {{ $scaled := .Process "resize x31" }}
+      <img src="{{ $scaled.RelPermalink }}" alt="rss feed" title="my rss feed">
+      {{ end }}
+    </a>
+    
+  </div>
+
+  <div class="header__section">
+    cool people (hover)
+  </div>
+  <div class="header__buttons">
+    <a class="a--plain" href="https://psychcool.org/">
+      {{ with resources.GetMatch "images/people/psychcool.png" }}
+      <img src="{{ .RelPermalink }}" alt="psychcool.org" title="the guy that inspired me to finally make a web 1.0 site.">
+      {{ end }}
+    </a>
+    <a class="a--plain" href="https://msx.horse">
+      {{ with resources.GetMatch "images/people/msx.horse.gif" }}
+      <img src="{{ .RelPermalink }}" alt="msx.horse" title="cool electronic music and retro computer stuff!">
+      {{ end }}
+    </a>
+    <a class="a--plain" href="/cool">
+      {{ with resources.GetMatch "images/people/more.gif" }}
+      <img src="{{ .RelPermalink }}" alt="more cool people" title="more cool people who don't have buttons">
+      {{ end }}
+    </a>
+  </div>
+
+  <div class="header__section">
+    buttons!
+  </div>
+  <div class="header__buttons">
+    {{ with resources.Match "images/buttons/*" }}
+    {{ range . }}
+    <img src="{{ .RelPermalink }}">
+    {{ end }}
+    {{ end }}
+  </div>
+  
+</header>

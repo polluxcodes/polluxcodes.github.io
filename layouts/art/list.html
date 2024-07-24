@@ -1,0 +1,17 @@
+{{ define "main" }}
+
+{{ .Content }}
+
+<div style="display: flex; flex-wrap: wrap;">
+  {{ range .Resources.ByType "image" }}
+  {{ $thumb := .Process "png resize 300x" }}
+  {{ $sizeInBytes := len .Content }}
+  <div style="display:inline; margin:0.5rem;">
+    {{ .Title }}<br>
+    <img src="{{ $thumb.RelPermalink }}" alt=""><br>
+    <a href="{{ .RelPermalink }}" download>download original ({{ div $sizeInBytes 1024 }}KiB)</a>  
+  </div>
+  {{ end }}
+</div>
+
+{{ end }}

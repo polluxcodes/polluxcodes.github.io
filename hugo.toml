@@ -1,3 +1,27 @@
 baseURL = 'https://pollux.codes/'
 languageCode = 'en-us'
-title = 'Pollux::codes'
+title = 'pollux::codes'
+
+[params]
+  [params.author]
+    email = 'pollux@pollux.codes'
+    name = 'Pollux'
+
+[taxonomies]
+  blogtopic = "blogtopics"
+  devlogproject = "devlogproject"
+
+[permalinks]
+  blogtopics = "/blog/topics/:title"
+  devlogproject = "/devlog/projects/:title"
+
+[outputs]
+home = ['html', 'rss']
+section = ['html']
+taxonomy = ['html']
+term = ['html']
+
+[outputFormats]
+[outputFormats.RSS]
+mediatype = "application/rss"
+baseName = "feed"

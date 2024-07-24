@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+
+  --navbar-width: max(264px + 2rem, 15%);  
+
+  --bg0: rgb(8, 16, 24);
+  --bg1: rgb(16, 32, 48);
+
+  --fg0: rgb(200, 228, 255);
+
+  --hi0: rgb(64, 255, 200);
+  --hi1: rgb(255, 128, 128);
+
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.125rem;
+  line-height: 2rem;
+
+  background-color: var(--bg0);
+  color: var(--fg0);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+a {
+  color: var(--hi0);
+
+  &:hover {
+    color: var(--hi1);
+  }
+
+  &.a--plain {
+    text-decoration: none;
+    line-height: 0;
+  }
+}
+
+ul {
+  {{ with resources.GetMatch "*/bullet.png" }}
+  list-style-image: url('{{ .RelPermalink }}')
+  {{ end }}
+}
+
+main, footer {
+  margin-left: var(--navbar-width);
+  max-width: 50rem;
+
+  padding: 1rem;
+}
+
+.header {
+  width: var(--navbar-width);
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflox-x: hidden;
+
+  padding: 1rem;
+
+  &__pic {
+    width: 100%;
+  }
+
+  &__section {
+    text-align: center;
+    overflow: hidden;
+
+    position: relative;
+    
+    &:before, &:after {
+      position:absolute;
+      top: 51%;
+      overflow: hidden;
+      width: 48%;
+      height: 1px;
+      content: '\a0';
+      background-color: var(--fg0);
+      margin-left: 2%;
+    }
+
+    &:before {
+      margin-left: -50%;
+      text-align: right;
+    }
+  }
+
+  &__navigation {
+
+    flex-direction: column;
+
+
+    a {
+
+      text-align: center;
+
+      line-height: 2rem;
+
+      display: block;
+      height: 2rem;
+
+      &:hover {
+        background-color: var(--bg1);
+      }
+    }
+
+  }
+
+  &__buttons {
+    min-width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-align: center;
+    border-spacing: 0px;
+  }
+}
+

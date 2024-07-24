@@ -1,0 +1,6 @@
+{{- $url := urls.Parse .Destination -}}
+{{- $getpage := site.GetPage .Destination -}}
+{{- $internal := lt (len $url.Host) 1 -}}
+
+<a href="{{ .Destination | safeURL }}">{{ or .Text .Title $getpage.LinkTitle | safeHTML }}</a>{{- if not $internal -}}&#x2197;{{- end -}}
+
